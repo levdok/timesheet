@@ -1,4 +1,5 @@
 import re
+import sys
 from ConfigParser import SafeConfigParser
 
 import arrow
@@ -17,6 +18,10 @@ config.read(SETTINGS_FILE)
 params = {'start_date': config.get('tempo', 'lastSuccessful'), 'end_date': END_TIME}
 
 toggl_response = requests.get(TOGGL_URL, auth=(config.get('toggl', 'token'), 'api_token'), params=params)
+
+if len(toggl_response.json()) == 0:
+    print("already updated")
+    sys.exit()
 
 df = pd.DataFrame(toggl_response.json())
 df['date'] = df.apply(lambda row: (arrow.get(row.start)).date().isoformat(), axis=1)
