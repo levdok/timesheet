@@ -37,11 +37,9 @@ for task in collapsed_data:
 
     start_date = task.get('date')
     start_time = arrow.get(task.get('start')).time().isoformat()
-    description = ''
+    description = task.get('description').replace(key, '').strip()
     if not description:
         description = config.get('tempo', 'defaultDescription')
-    else:
-        description = task.get('description').replace(key, '').strip()
 
     data = {
         'issueKey': key,
