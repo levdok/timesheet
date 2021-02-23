@@ -2,6 +2,8 @@
 The script moves your timesheets from Toggl to Jira Tempo. 
 
 ## How does it works? 
+The script uses python 3. Modules arrow, pandas and requesrs should be set. 
+
 Set settings.ini:
 Add toggle's and tempo's tokens and tempo's authorAccountId.
 Set lastsuccessful. It is date and time in ISO which search in Toggl will be performed from.
